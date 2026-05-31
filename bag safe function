@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include <string.h>
+struct LabTest {
+    int testID;
+    int bagId;
+    char disease[50];
+    char result[20];
+
+
+};
+#define Max_rec 100
+struct LabTest test[Max_rec];
+int testcount = 0;
+
+void logTest();
+void bagsafe();
+void bagcount();
+void testhistory();
+void pendingtest();//display pending test
+int main() {
+    int choice , n=1, schoice;;
+    while (n){
+    printf("\n======================================================\n");
+    printf(" Decentralized Blood Bank & Emergency Matching Network  \n");
+    printf("======================================================\n");
+    printf("1. Donor Registry       \n");
+    printf("2. Inventory & Storage      \n");
+    printf("3. Testing & Screening      \n");
+    printf("4. Hospital Requests        \n");
+    printf("5. Drive Logistics      \n");
+    printf("6. Exit System      \n");
+    printf("Enter module number to access: ");
+    scanf("%d", &choice);
+
+        switch (choice) {
+            case 3:
+                printf("\n--- Hospital Requests ---\n");
+                printf("1. Register Donor\n");
+                printf("2. Mark Safe\n");
+                printf("3.Mark Contaminated\n");
+                printf("4. Search History\n");
+                printf("5. View Pending\nSelect:");
+                scanf("%d", &schoice);
+
+               if (schoice == 1) {
+                   logTest();
+               }
+                else if (schoice==2) {
+                    bagsafe();
+                }
+                break;
+
+        }
+}
+
+
+}
+
+void logTest() {
+    if (testcount<Max_rec) {
+        printf("Enter the test ID : ");
+        scanf("%d" , &test[testcount].testID);
+        printf("Enter the bag ID : ");
+        scanf("%d" , &test[testcount].bagId);
+        printf("Enter Disease Marker (e.g., HIV, HepB): ");
+        scanf("%s" , &test[testcount].disease);
+        strcpy(test[testcount].result, "Pending");
+        testcount++;
+        printf("Test logged successfully.\n");
+
+    }
+}
+void bagsafe() {
+    int id;
+    printf("Enter test ID : ");
+    scanf("%d" , &id);
+    for (int i = 0 ; i<testcount ; i++) {
+        if (test[i].testID==id) {
+            strcpy(test[i].result,"safe");
+            printf("Bag marked as safe");
+        }
+    }
+
+
+}
