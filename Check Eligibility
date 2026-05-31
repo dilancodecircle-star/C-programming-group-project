@@ -1,0 +1,17 @@
+void checkEligibility();
+void checkEligibility() {
+    int id;
+    printf("Enter Donor ID to check: ");
+    scanf("%d", &id);
+    for(int i = 0; i < donorCount; i++) {
+        if(donors[i].donorID == id) {
+            if(donors[i].daysSinceLastDonation > 90) {
+                printf("Eligible to donate.\n");
+            } else {
+                printf("Not eligible. Must wait %d more days.\n", 90 - donors[i].daysSinceLastDonation);
+            }
+            return;
+        }
+    }
+    printf("Donor not found.\n");
+}
