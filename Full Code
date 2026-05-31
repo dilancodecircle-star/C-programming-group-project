@@ -1,0 +1,121 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_RECORDS 100
+
+struct BloodBag {
+    int bagID;
+    int donorID;
+    char bloodType[5];
+    int daysToExpiry;
+};
+
+struct BloodBag inventory[MAX_RECORDS];
+int bagCount = 0;
+
+
+
+void logNewDonation();
+void discardExpiredBlood();
+void searchInventoryByType();
+void calculateTotalUnits();
+void listBagsNearingExpiry();
+
+
+int main() {
+    int choice;
+    
+    while(1) {
+        printf("\n======================================================\n");
+        printf(" Decentralized Blood Banking & Emergency Matching Network  \n");
+        printf("======================================================\n");
+        printf("1. Donor Registry          (Ranidu's Module)\n");
+        printf("2. Inventory & Storage     (Sandara's Module)\n");
+        printf("3. Testing & Screening     (Dilan's Module)\n");
+        printf("4. Hospital Requests       (Sandapium's Module)\n");
+        printf("5. Drive Logistics         (Geethanjali's Module)\n");
+        printf("6. Exit System\n");
+        printf("Enter module number to access: ");
+        scanf("%d", &choice);
+        
+        switch(choice) {
+          
+            case 2: {
+                int subChoice;
+                printf("\n--- Inventory & Storage ---\n");
+                printf("1. Log Donation\n2. Discard Expired\n3. Search by Type\n4. Calculate Total\n5. List Nearing Expiry\nSelect: ");
+                scanf("%d", &subChoice);
+                if(subChoice == 1) logNewDonation();
+                else if(subChoice == 2) discardExpiredBlood();
+                else if(subChoice == 3) searchInventoryByType();
+                else if(subChoice == 4) calculateTotalUnits();
+                else if(subChoice == 5) listBagsNearingExpiry();
+                break;
+            }
+         
+            case 6:
+                printf("Exiting system. Goodbye!\n");
+                exit(0);
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+    return 0;
+}
+
+void logNewDonation() {
+    if(bagCount < MAX_RECORDS) {
+        printf("Enter Bag ID: ");
+        scanf("%d", &inventory[bagCount].bagID);
+        printf("Enter Donor ID: ");
+        scanf("%d", &inventory[bagCount].donorID);
+        printf("Enter Blood Type: ");
+        scanf("%s", inventory[bagCount].bloodType);
+        printf("Enter days to expiry (usually 42): ");
+        scanf("%d", &inventory[bagCount].daysToExpiry);
+        bagCount++;
+        printf("Bag added to inventory.\n");
+    }
+}
+
+void discardExpiredBlood() {
+    int count = 0;
+    for(int i = 0; i < bagCount; i++) {
+        if(inventory[i].daysToExpiry <= 0) {
+            inventory[i].daysToExpiry = -1; // Flag as discarded
+            count++;
+        }
+    }
+    printf("%d expired bags discarded from system.\n", count);
+}
+
+void searchInventoryByType() {
+    char type[5];
+    int count = 0;
+    printf("Enter Blood Type: ");
+    scanf("%s", type);
+    for(int i = 0; i < bagCount; i++) {
+        if(strcmp(inventory[i].bloodType, type) == 0 && inventory[i].daysToExpiry > 0) {
+            count++;
+        }
+    }
+    printf("Total available %s bags: %d\n", type, count);
+}
+
+void calculateTotalUnits() {
+    int active = 0;
+    for(int i = 0; i < bagCount; i++) {
+        if(inventory[i].daysToExpiry > 0) active++;
+    }
+    printf("Total valid blood units in bank: %d\n", active);
+}
+
+void listBagsNearingExpiry() {
+    printf("Bags expiring in less than 5 days:\n");
+    for(int i = 0; i < bagCount; i++) {
+        if(inventory[i].daysToExpiry > 0 && inventory[i].daysToExpiry <= 5) {
+            printf("Bag ID: %d | Days left: %d\n", inventory[i].bagID, inventory[i].daysToExpiry);
+        }
+    }
+}
