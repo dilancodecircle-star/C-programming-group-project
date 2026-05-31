@@ -1,0 +1,32 @@
+int main() {
+    int choice;
+    
+    while(1) {
+        printf("\n======================================================\n");
+        printf(" Decentralized Blood Bank & Emergency Matching Network  \n");
+        printf("======================================================\n");
+        printf("1. Donor Registry \n");
+        printf("Enter module number to access: ");
+        scanf("%d", &choice);
+        
+        switch(choice) {
+            case 1: {
+                int subChoice;
+                printf("\n--- Donor Registry ---\n");
+                printf("1. Register Donor\n2. Update Contact\n3. Check Eligibility\n4. Search by Blood Type\n5. List Eligible Donors\nSelect: ");
+                scanf("%d", &subChoice);
+                if(subChoice == 1) registerDonor();
+                else if(subChoice == 2) updateDonorContact();
+                else if(subChoice == 3) checkEligibility();
+                else if(subChoice == 4) searchDonorByBloodType();
+                else if(subChoice == 5) listEligibleDonors();
+                break;
+            }
+            case 6:
+                printf("Exiting system. Goodbye!\n");
+                exit(0);
+            default:
+                printf("Invalid choice. Please try again.\n");
+        )
+    )
+)
