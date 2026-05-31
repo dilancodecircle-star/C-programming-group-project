@@ -1,0 +1,43 @@
+#include <stdio.h>
+struct LabTest {
+    int testID;
+    int bagId;
+    char disease[50];
+    char result[20];
+
+
+};
+#define Max_rec 100
+struct LabTest test[Max_rec];
+int bagCount = 0;
+
+void log();
+void bagsafe();
+void bagcount();
+void testhistory();
+void pendingtest();
+int main() {
+    int choice;
+    while (1){
+
+        printf("\n======================================================\n");
+    printf(" Decentralized Blood Bank & Emergency Matching Network  \n");
+    printf("======================================================\n");
+    printf("1. Donor Registry       \n");
+    printf("2. Inventory & Storage      \n");
+    printf("3. Testing & Screening      \n");
+    printf("4. Hospital Requests        \n");
+    printf("5. Drive Logistics      \n");
+    printf("6. Exit System      \n");
+    printf("Enter module number to access: ");
+    scanf("%d", &choice);
+
+        switch (choice){}
+        case 1:
+        int schoice;
+
+
+
+}
+
+}
