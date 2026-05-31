@@ -1,0 +1,40 @@
+int main() {
+    int choice;
+    
+    while(1) {
+        printf("\n======================================================\n");
+        printf(" Decentralized Blood Banking & Emergency Matching Network  \n");
+        printf("======================================================\n");
+        printf("1. Donor Registry          (Ranidu's Module)\n");
+        printf("2. Inventory & Storage     (Sandara's Module)\n");
+        printf("3. Testing & Screening     (Dilan's Module)\n");
+        printf("4. Hospital Requests       (Sandapium's Module)\n");
+        printf("5. Drive Logistics         (Geethanjali's Module)\n");
+        printf("6. Exit System\n");
+        printf("Enter module number to access: ");
+        scanf("%d", &choice);
+        
+        switch(choice) {
+          
+            case 2: {
+                int subChoice;
+                printf("\n--- Inventory & Storage ---\n");
+                printf("1. Log Donation\n2. Discard Expired\n3. Search by Type\n4. Calculate Total\n5. List Nearing Expiry\nSelect: ");
+                scanf("%d", &subChoice);
+                if(subChoice == 1) logNewDonation();
+                else if(subChoice == 2) discardExpiredBlood();
+                else if(subChoice == 3) searchInventoryByType();
+                else if(subChoice == 4) calculateTotalUnits();
+                else if(subChoice == 5) listBagsNearingExpiry();
+                break;
+            }
+         
+            case 6:
+                printf("Exiting system. Goodbye!\n");
+                exit(0);
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+    return 0;
+}
