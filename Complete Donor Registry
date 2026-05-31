@@ -1,0 +1,124 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_RECORDS 100
+
+struct Donor {
+    int donorID;
+    char name[50];
+    char bloodType[5];
+    int daysSinceLastDonation;
+};
+
+struct Donor donors[MAX_RECORDS];
+int donorCount = 0;
+
+void registerDonor();
+void updateDonorContact();
+void checkEligibility();
+void searchDonorByBloodType();
+void listEligibleDonors();
+
+int main() {
+    int choice;
+    
+    while(1) {
+        printf("\n======================================================\n");
+        printf(" Decentralized Blood Bank & Emergency Matching Network  \n");
+        printf("======================================================\n");
+        printf("1. Donor Registry \n");
+        printf("Enter module number to access: ");
+        scanf("%d", &choice);
+        
+        switch(choice) {
+            case 1: {
+                int subChoice;
+                printf("\n--- Donor Registry ---\n");
+                printf("1. Register Donor\n2. Update Contact\n3. Check Eligibility\n4. Search by Blood Type\n5. List Eligible Donors\nSelect: ");
+                scanf("%d", &subChoice);
+                if(subChoice == 1) registerDonor();
+                else if(subChoice == 2) updateDonorContact();
+                else if(subChoice == 3) checkEligibility();
+                else if(subChoice == 4) searchDonorByBloodType();
+                else if(subChoice == 5) listEligibleDonors();
+                break;
+            }
+            case 6:
+                printf("Exiting system. Goodbye!\n");
+                exit(0);
+            default:
+                printf("Invalid choice. Please try again.\n");
+        )
+    )
+)
+
+void registerDonor() {
+    if(donorCount < MAX_RECORDS) {
+        printf("Enter Donor ID: ");
+        scanf("%d", &donors[donorCount].donorID);
+        printf("Enter Name: ");
+        scanf("%s", donors[donorCount].name); 
+        printf("Enter Blood Type (e.g., O+, AB-): ");
+        scanf("%s", donors[donorCount].bloodType);
+        printf("Enter days since last donation: ");
+        scanf("%d", &donors[donorCount].daysSinceLastDonation);
+        donorCount++;
+        printf("Donor registered successfully!\n");
+    } else {
+        printf("Registry full!\n");
+    }
+}
+
+void updateDonorContact() {
+    int id;
+    printf("Enter Donor ID to update: ");
+    scanf("%d", &id);
+    for(int i = 0; i < donorCount; i++) {
+        if(donors[i].donorID == id) {
+            printf("Enter new Name: ");
+            scanf("%s", donors[i].name);
+            printf("Contact updated.\n");
+            return;
+        }
+    }
+    printf("Donor not found.\n");
+}
+
+void checkEligibility() {
+    int id;
+    printf("Enter Donor ID to check: ");
+    scanf("%d", &id);
+    for(int i = 0; i < donorCount; i++) {
+        if(donors[i].donorID == id) {
+            if(donors[i].daysSinceLastDonation > 90) {
+                printf("Eligible to donate.\n");
+            } else {
+                printf("Not eligible. Must wait %d more days.\n", 90 - donors[i].daysSinceLastDonation);
+            }
+            return;
+        }
+    }
+    printf("Donor not found.\n");
+}
+
+void searchDonorByBloodType() {
+    char type[5];
+    printf("Enter Blood Type to search: ");
+    scanf("%s", type);
+    printf("Donors with type %s:\n", type);
+    for(int i = 0; i < donorCount; i++) {
+        if(strcmp(donors[i].bloodType, type) == 0) {
+            printf("- %s (ID: %d)\n", donors[i].name, donors[i].donorID);
+        }
+    }
+}
+
+void listEligibleDonors() {
+    printf("Currently Eligible Donors:\n");
+    for(int i = 0; i < donorCount; i++) {
+        if(donors[i].daysSinceLastDonation > 90) {
+            printf("- %s (%s)\n", donors[i].name, donors[i].bloodType);
+        }
+    }
+}
