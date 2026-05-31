@@ -114,5 +114,43 @@ int main()
         }
     }
 
+    void removeEvent()
+    {
+        int eId;
+        printf("Enter Event ID to remove: ");
+        scanf("%d", &eId);
+        for (int i = 0; i < eventCount; i++)
+        {
+            if (events[i].eventID == eId)
+            {
+                events[i].goalUnits = -1;
+                printf("Event removed.\n");
+                return;
+            }
+        }
+    }
+
+    void highlightTopEvent()
+    {
+        int topIndex = 0;
+        int maxUnits = -1;
+        for (int i = 0; i < eventCount; i++)
+        {
+            if (events[i].gatheredUnits > maxUnits)
+            {
+                maxUnits = events[i].gatheredUnits;
+                topIndex = i;
+            }
+        }
+        if (maxUnits >= 0)
+        {
+            printf("Top event was at %s with %d units gathered.\n", events[topIndex].venue, maxUnits);
+        }
+        else
+        {
+            printf("No events recorded yet.\n");
+        }
+    }
+
     return 0;
 }
