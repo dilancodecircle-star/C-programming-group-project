@@ -1,0 +1,17 @@
+void registerDonor();
+void registerDonor() {
+    if(donorCount < MAX_RECORDS) {
+        printf("Enter Donor ID: ");
+        scanf("%d", &donors[donorCount].donorID);
+        printf("Enter Name: ");
+        scanf("%s", donors[donorCount].name); 
+        printf("Enter Blood Type (e.g., O+, AB-): ");
+        scanf("%s", donors[donorCount].bloodType);
+        printf("Enter days since last donation: ");
+        scanf("%d", &donors[donorCount].daysSinceLastDonation);
+        donorCount++;
+        printf("Donor registered successfully!\n");
+    } else {
+        printf("Registry full!\n");
+    }
+}
