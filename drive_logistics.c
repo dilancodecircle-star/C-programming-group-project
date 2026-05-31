@@ -1,6 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define MAX_EVENTS 100
+
+// =========================================================================
+// 1. STRUCTURE DEFINITIONS
+// =========================================================================
+
+struct DonationEvent
+{
+    int eventID;
+    char venue[50];
+    int goalUnits;
+    int gatheredUnits;
+    char scheduleDate[15];
+};
+
 int main()
 {
     int choice;
