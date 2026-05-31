@@ -152,5 +152,16 @@ int main()
         }
     }
 
+    void showUpcomingEvents()
+    {
+        printf("Upcoming Donation Events:\n");
+        for (int i = 0; i < eventCount; i++)
+        {
+            if (events[i].goalUnits > 0)
+            {
+                printf("Date: %s | Venue: %s | Goal: %d units\n", events[i].scheduleDate, events[i].venue, events[i].goalUnits);
+            }
+        }
+    }
     return 0;
 }
