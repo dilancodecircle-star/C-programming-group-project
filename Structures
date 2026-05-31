@@ -1,0 +1,9 @@
+struct BloodBag {
+    int bagID;
+    int donorID;
+    char bloodType[5];
+    int daysToExpiry;
+};
+
+struct BloodBag inventory[MAX_RECORDS];
+int bagCount = 0;
