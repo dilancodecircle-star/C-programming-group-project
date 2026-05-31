@@ -1,0 +1,5 @@
+void logNewDonation();
+void discardExpiredBlood();
+void searchInventoryByType();
+void calculateTotalUnits();
+void listBagsNearingExpiry();
