@@ -1,0 +1,6 @@
+struct Donor {
+    int donorID;
+    char name[50];
+    char bloodType[5];
+    int daysSinceLastDonation;
+};
