@@ -67,7 +67,20 @@ int main()
             break;
         case 5:
         {
-            printf("\n--- Not Available ---\n");
+            int subChoice;
+            printf("\n--- Event Logistics ---\n");
+            printf("1. Add Event\n2. Record Units\n3. Remove Event\n4. Highlight Top Event\n5. Show Upcoming\nSelect: ");
+            scanf("%d", &subChoice);
+            if (subChoice == 1)
+                addEvent();
+            else if (subChoice == 2)
+                recordUnits();
+            else if (subChoice == 3)
+                removeEvent();
+            else if (subChoice == 4)
+                highlightTopEvent();
+            else if (subChoice == 5)
+                showUpcomingEvents();
             break;
         }
         case 6:
