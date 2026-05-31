@@ -96,5 +96,23 @@ int main()
         }
     }
 
+    void recordUnits()
+    {
+        int eId, units;
+        printf("Enter Event ID: ");
+        scanf("%d", &eId);
+        printf("Enter newly gathered units: ");
+        scanf("%d", &units);
+        for (int i = 0; i < eventCount; i++)
+        {
+            if (events[i].eventID == eId)
+            {
+                events[i].gatheredUnits += units;
+                printf("Total units gathered for event %d: %d\n", eId, events[i].gatheredUnits);
+                return;
+            }
+        }
+    }
+
     return 0;
 }
