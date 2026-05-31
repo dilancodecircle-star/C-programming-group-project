@@ -16,6 +16,13 @@ struct DonationEvent
     char scheduleDate[15];
 };
 
+// =========================================================================
+// GLOBAL ARRAYS & COUNTERS
+// =========================================================================
+
+struct DonationEvent events[MAX_EVENTS];
+int eventCount = 0;
+
 int main()
 {
     int choice;
