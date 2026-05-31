@@ -23,6 +23,16 @@ struct DonationEvent
 struct DonationEvent events[MAX_EVENTS];
 int eventCount = 0;
 
+// =========================================================================
+// FUNCTION PROTOTYPES
+// =========================================================================
+
+void addEvent();
+void recordUnits();
+void removeEvent();
+void highlightTopEvent();
+void showUpcomingEvents();
+
 int main()
 {
     int choice;
