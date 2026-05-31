@@ -1,0 +1,23 @@
+#include <stdio.>
+struct LabTest {
+    int testID;
+    int bagId;
+    char disease[50];
+    char result[20];
+
+
+};
+#define Max_rec 100
+struct LabTest test[Max_rec];
+int bagCount = 0;
+
+void log();
+void bagsafe();
+void bagcount();
+void testhistory();
+void pendingtest();
+int main() {
+    int choice;
+   
+
+}
