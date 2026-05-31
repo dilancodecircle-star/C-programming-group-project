@@ -77,5 +77,24 @@ int main()
             printf("Invalid choice. Please try again.\n");
         }
     }
+
+    void addEvent()
+    {
+        if (eventCount < MAX_EVENTS)
+        {
+            printf("Enter Event ID: ");
+            scanf("%d", &events[eventCount].eventID);
+            printf("Enter Venue: ");
+            scanf("%s", events[eventCount].venue);
+            printf("Enter Date (DD-MM-YYYY): ");
+            scanf("%s", events[eventCount].scheduleDate);
+            printf("Enter Goal Units: ");
+            scanf("%d", &events[eventCount].goalUnits);
+            events[eventCount].gatheredUnits = 0;
+            eventCount++;
+            printf("Event added successfully.\n");
+        }
+    }
+
     return 0;
 }
