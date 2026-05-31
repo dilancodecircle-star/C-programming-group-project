@@ -1,0 +1,15 @@
+void updateDonorContact();
+void updateDonorContact() {
+    int id;
+    printf("Enter Donor ID to update: ");
+    scanf("%d", &id);
+    for(int i = 0; i < donorCount; i++) {
+        if(donors[i].donorID == id) {
+            printf("Enter new Name: ");
+            scanf("%s", donors[i].name);
+            printf("Contact updated.\n");
+            return;
+        }
+    }
+    printf("Donor not found.\n");
+}
