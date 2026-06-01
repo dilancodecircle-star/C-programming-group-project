@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+//making structure for lab test
 struct LabTest {
     int testID;
     int bagId;
@@ -9,19 +10,19 @@ struct LabTest {
 
 };
 #define Max_rec 100
-struct LabTest test[Max_rec];
+struct LabTest test[Max_rec];//making array for labtest
 int testcount = 0;
 
 void logTest();
 void bagsafe();
 void bagGerm();
 void testhistory();
-void pendingtest();//display pending test
+void pendingtest();//function for display pending test
 int main() {
     int choice , n=1, schoice;;
     while (n){
     printf("\n======================================================\n");
-    printf(" Decentralized Blood Bank & Emergency Matching Network  \n");
+    printf(" Decentralized Blood Bank System  \n");
     printf("======================================================\n");
     printf("1. Donor Registry       \n");
     printf("2. Inventory & Storage      \n");
@@ -42,30 +43,31 @@ int main() {
                 printf("5. View Pending\nSelect:");
                 scanf("%d", &schoice);
 
-               if (schoice == 1) {
+               if (schoice == 1) {//calling funtion one
                    logTest();
                }
-                else if (schoice==2) {
+                else if (schoice==2) {// calling function two
                     bagsafe();
                 }
-                else if (schoice==3) {
+                else if (schoice==3) {//calling function three
                     bagGerm();
 
                 }
-                else if (schoice==4) {
+                else if (schoice==4) {//calling funtion four
                     testhistory();
                 }
-                else if (schoice==5) {
+                else if (schoice==5) {// calling funtion five
                     pendingtest();
                 }
                 break;
-
+            default:
+                printf("Invalid choice \n");
         }
 }
 
 
 }
-
+//making logtest
 void logTest() {
     if (testcount<Max_rec) {
         printf("Enter the test ID : ");
@@ -80,6 +82,7 @@ void logTest() {
 
     }
 }
+//rust blood bag as safe
 void bagsafe() {
     int id;
     printf("Enter test ID : ");
@@ -93,7 +96,7 @@ void bagsafe() {
 
 
 }
-
+// mark blood bag with germs
 void bagGerm(){
     int id;
     printf("Enter the ID : ");
@@ -106,7 +109,7 @@ void bagGerm(){
         }
     }
 }
-
+//serch bag wih bag id
 void testhistory() {
     int  bId;
     printf("Enter the bag ID : ");
@@ -118,12 +121,12 @@ void testhistory() {
     }
 
 }
-
+// find pending blood bags
 void pendingtest() {
     printf("pending Lab test :\n");
     for (int i=0;i<testcount ;i++) {
         if (strcmp(test[i].result , "Pending" ) == 0) {
-            printf("Test ID : %d  ,  Bag ID : %d" , test[i].testID , test[i].bagId );
+            printf("Test ID : %d  ,  Bag ID : %d \n" , test[i].testID , test[i].bagId );
         }
     }
 
