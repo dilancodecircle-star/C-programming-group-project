@@ -74,8 +74,10 @@ void logTest() {
         scanf("%d" , &test[testcount].testID);
         printf("Enter the bag ID : ");
         scanf("%d" , &test[testcount].bagId);
+        while(getchar()!="\n");
         printf("Enter Disease Marker (e.g., HIV, HepB): ");
-        scanf("%s" , &test[testcount].disease);
+        fgets(test.[testcount].disease , 50 , stdin);
+        test[testcount].disease[strcspn(test[testcount].disease , "\n") = '\0';
         strcpy(test[testcount].result, "Pending");
         testcount++;
         printf("Test logged successfully.\n");
