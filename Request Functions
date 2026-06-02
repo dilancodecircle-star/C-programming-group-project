@@ -1,0 +1,5 @@
+void logReq();
+void matchReq();
+void fulfillReq();
+void cancelReq();
+void urgencyReq();
