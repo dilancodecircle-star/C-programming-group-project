@@ -1,13 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_EVENTS 100
+#define MAX_EVENTS 100   // define array
 
-// =========================================================================
-// 1. STRUCTURE DEFINITIONS
-// =========================================================================
 
-struct DonationEvent
+struct DonationEvent // making structure for donation
 {
     int eventID;
     char venue[50];
@@ -16,16 +13,12 @@ struct DonationEvent
     char scheduleDate[15];
 };
 
-// =========================================================================
-// GLOBAL ARRAYS & COUNTERS
-// =========================================================================
 
-struct DonationEvent events[MAX_EVENTS];
+
+struct DonationEvent events[MAX_EVENTS]; // define array for structure
 int eventCount = 0;
 
-// =========================================================================
-// FUNCTION PROTOTYPES
-// =========================================================================
+
 
 void addEvent();
 void recordUnits();
@@ -33,14 +26,14 @@ void removeEvent();
 void highlightTopEvent();
 void showUpcomingEvents();
 
-int main()
+int main()  //main function
 {
-    int choice;
+    int choice , n=1;
 
-    while (1)
+    while (n)
     {
         printf("\n======================================================\n");
-        printf(" Community Blood Donation & Matching System \n");
+        printf("Decentralized Blood Banking System \n");
         printf("======================================================\n");
         printf("1. Donor Registry          \n");
         printf("2. Inventory & Storage     \n");
@@ -53,39 +46,33 @@ int main()
 
         switch (choice)
         {
-        case 1:
-            printf("\n--- Not Available ---\n");
-            break;
-        case 2:
-            printf("\n--- Not Available ---\n");
-            break;
-        case 3:
-            printf("\n--- Not Available ---\n");
-            break;
-        case 4:
-            printf("\n--- Not Available ---\n");
-            break;
+  
         case 5:
-        {
+        
             int subChoice;
             printf("\n--- Event Logistics ---\n");
             printf("1. Add Event\n2. Record Units\n3. Remove Event\n4. Highlight Top Event\n5. Show Upcoming\nSelect: ");
             scanf("%d", &subChoice);
-            if (subChoice == 1)
+            if (subChoice == 1){
                 addEvent();
-            else if (subChoice == 2)
+            }
+            else if (subChoice == 2){
                 recordUnits();
-            else if (subChoice == 3)
+            else if (subChoice == 3){
                 removeEvent();
-            else if (subChoice == 4)
+            }
+            else if (subChoice == 4){
                 highlightTopEvent();
-            else if (subChoice == 5)
+            }
+            else if (subChoice == 5){
                 showUpcomingEvents();
+            }
             break;
-        }
+        
         case 6:
             printf("Exiting system. Goodbye!\n");
-            exit(0);
+            n=0;
+            continue;
         default:
             printf("Invalid choice. Please try again.\n");
         }
@@ -93,7 +80,7 @@ int main()
     return 0;
 }
 
-void addEvent()
+void addEvent() //This function for add a new event
 {
     if (eventCount < MAX_EVENTS)
     {
@@ -111,7 +98,7 @@ void addEvent()
     }
 }
 
-void recordUnits()
+void recordUnits()  //This function for update the total amount of blood collected for a specific camp as donation come in.
 {
     int eId, units;
     printf("Enter Event ID: ");
@@ -129,7 +116,7 @@ void recordUnits()
     }
 }
 
-void removeEvent()
+void removeEvent()  //This function for cancel a sheduled blood donation camp.
 {
     int eId;
     printf("Enter Event ID to remove: ");
@@ -145,7 +132,7 @@ void removeEvent()
     }
 }
 
-void highlightTopEvent()
+void highlightTopEvent()  //This function for find and display the most successful blood donation camp
 {
     int topIndex = 0;
     int maxUnits = -1;
@@ -167,7 +154,7 @@ void highlightTopEvent()
     }
 }
 
-void showUpcomingEvents()
+void showUpcomingEvents()  //This function for display a list of all the active,upcoming blood donation camps
 {
     printf("Upcoming Donation Events:\n");
     for (int i = 0; i < eventCount; i++)
