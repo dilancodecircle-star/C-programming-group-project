@@ -34,11 +34,13 @@ int main() {
         scanf("%d", &choice);
         
         switch(choice) {
+            //selecting the sub part donor registry
             case 1: {
                 int subChoice;
                 printf("\n--- Donor Registry ---\n");
                 printf("1. Register Donor\n2. Update Contact\n3. Check Eligibility\n4. Search by Blood Type\n5. List Eligible Donors\nSelect: ");
                 scanf("%d", &subChoice);
+                //selecting the sub functions
                 if(subChoice == 1) donorregistry();
                 else if(subChoice == 2) donorcontactupdate();
                 else if(subChoice == 3) eligiblitycheck();
@@ -57,6 +59,7 @@ int main() {
 )
 
 void donorregistry() {
+    //registers the maximum number of donors described above
     if(donorCount < MAX_RECORDS) {
         printf("Enter Donor ID: ");
         scanf("%d", &donors[donorCount].donorID);
@@ -93,6 +96,7 @@ void eligibilitycheck() {
     printf("Enter Donor ID to check: ");
     scanf("%d", &id);
     for(int i = 0; i < donorCount; i++) {
+        //checking whether the id that was entered matches with id in the array
         if(donors[i].donorID == id) {
             if(donors[i].lastdonationdate > 90) {
                 printf("Eligible to donate.\n");
@@ -111,6 +115,7 @@ void searchbybloodtype() {
     scanf("%s", type);
     printf("Donors with type %s:\n", type);
     for(int i = 0; i < donorCount; i++) {
+        //searching the blood type wanted by comparing it with the availble donors and their blood type
         if(strcmp(donors[i].bloodType, type) == 0) {
             printf("- %s (ID: %d)\n", donors[i].name, donors[i].donorID);
         }
@@ -120,6 +125,7 @@ void searchbybloodtype() {
 void eligibledonorlist() {
     printf("Currently Eligible Donors:\n");
     for(int i = 0; i < donorCount; i++) {
+        //checking whether the donor has waited at least 90 days after the last donation to donate blood again
         if(donors[i].lastdonationdate > 90) {
             printf("- %s (%s)\n", donors[i].name, donors[i].bloodType);
         }
