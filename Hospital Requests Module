@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_REC 100 // / Define maximum array size
+#define MAX_REC 100 //  Define maximum array size
 
 struct Request {
     int requestID;
