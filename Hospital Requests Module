@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_REC 100
+#define MAX_REC 100 // / Define maximum array size
 
 struct Request {
     int requestID;
@@ -61,7 +61,8 @@ int main() {
     return 0;
 }
 
-void logReq() {
+void logReq() // This function is for add a new blood request from a hospital into the system
+{
     if(requestCount < MAX_REC) {
         printf("Enter Request ID: ");
         scanf("%d", &requests[requestCount].requestID);
@@ -77,7 +78,8 @@ void logReq() {
     }
 }
 
-void matchReq() {
+void matchReq() // This function is for search through the stored blood bags to see if there is an unexpired bag that matches the blood type requested by the hospital
+{
     int reqId;
     printf("Enter Request ID to check matches: ");
     scanf("%d", &reqId);
@@ -96,7 +98,8 @@ void matchReq() {
     }
 }
 
-void fulfillReq() {
+void fulfillReq() // This function is for change the status of a hospital's request to "Fulfilled" once they have received their blood.
+{
     int reqId;
     printf("Enter Request ID to fulfill: ");
     scanf("%d", &reqId);
@@ -109,7 +112,8 @@ void fulfillReq() {
     }
 }
 
-void cancelReq() {
+void cancelReq() // This function is for change the status of a hospital's request to "Cancelled" if the blood is no longer needed.
+{
     int reqId;
     printf("Enter Request ID to cancel: ");
     scanf("%d", &reqId);
@@ -122,7 +126,8 @@ void cancelReq() {
     }
 }
 
-void urgencyReq() {
+void urgencyReq() // This function is for filter and display all active blood requests that have an urgency level of 4 or 5
+{
     printf("High Urgency Emergency Requests:\n");
     for(int i = 0; i < requestCount; i++) {
         if(requests[i].urgencyLevel >= 4 && strcmp(requests[i].status, "Pending") == 0) {
