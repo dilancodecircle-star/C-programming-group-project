@@ -1,4 +1,5 @@
-void logReq() {
+void logReq() // This function is for add a new blood request from a hospital into the system
+{
     if(requestCount < MAX_REC) {
         printf("Enter Request ID: ");
         scanf("%d", &requests[requestCount].requestID);
@@ -14,7 +15,8 @@ void logReq() {
     }
 }
 
-void matchReq() {
+void matchReq() // This function is for search through the stored blood bags to see if there is an unexpired bag that matches the blood type requested by the hospital.
+{
     int reqId;
     printf("Enter Request ID to check matches: ");
     scanf("%d", &reqId);
