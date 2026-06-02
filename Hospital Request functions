@@ -24,11 +24,9 @@ void matchReq() {
             for(int j = 0; j < bagCount; j++) {
                 if(strcmp(inventory[j].bloodType, requests[i].bloodType) == 0 && inventory[j].daysToExpiry > 0) {
                     printf("Match found! Bag ID: %d is available.\n", inventory[j].bagID);
-                    return;
                 }
             }
             printf("No matching blood available in inventory.\n");
-            return;
         }
     }
 }
@@ -41,7 +39,6 @@ void fulfillReq() {
         if(requests[i].requestID == reqId) {
             strcpy(requests[i].status, "Fulfilled");
             printf("Request marked as fulfilled.\n");
-            return;
         }
     }
 }
@@ -54,7 +51,6 @@ void cancelReq() {
         if(requests[i].requestID == reqId) {
             strcpy(requests[i].status, "Cancelled");
             printf("Request cancelled.\n");
-            return;
         }
     }
 }
