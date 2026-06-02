@@ -5,9 +5,9 @@ int main() {
         printf("\n======================================================\n");
         printf(" Decentralized Blood Banking System  \n");
         printf("======================================================\n");
-        printf("1. Donor Registry          (Dilan's Module)\n");
+        printf("1. Donor Registry          (Ranidu's Module)\n");
         printf("2. Inventory & Storage     (Sandara's Module)\n");
-        printf("3. Testing & Screening     (Ranidu's Module)\n");
+        printf("3. Testing & Screening     (Dilan's Module)\n");
         printf("4. Hospital Requests       (Sandapiyum's Module)\n");
         printf("5. Drive Logistics         (Geethanjali's Module)\n");
         printf("6. Exit System\n");
