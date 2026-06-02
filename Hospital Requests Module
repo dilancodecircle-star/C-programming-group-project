@@ -22,17 +22,17 @@ void cancelReq();
 void urgencyReq();
 
 int main() {
-    int choice;
+    int choice , n=1;
 
-    while(1) {
+    while(n) {
         printf("\n======================================================\n");
-        printf(" Decentralized Blood Banking & Emergency Matching Network  \n");
+        printf(" Decentralized Blood Banking system  \n");
         printf("======================================================\n");
-        printf("1. Donor Registry          (Dilan's Module)\n");
-        printf("2. Inventory & Storage     (Sandara's Module)\n");
-        printf("3. Testing & Screening     (Ranidu's Module)\n");
-        printf("4. Hospital Requests       (Sandapiyum's Module)\n");
-        printf("5. Drive Logistics         (Geethanjali's Module)\n");
+        printf("1. Donor Registry          \n");
+        printf("2. Inventory & Storage    \n");
+        printf("3. Testing & Screening     \n");
+        printf("4. Hospital Requests       \n");
+        printf("5. Drive Logistics         \n");
         printf("6. Exit System\n");
         printf("Enter module number to access: ");
         scanf("%d", &choice);
@@ -52,7 +52,8 @@ int main() {
             }
              case 6:
                 printf("Exiting system. Goodbye!\n");
-                exit(0);
+                n=0;
+                continue;
             default:
                 printf("Invalid choice. Please try again.\n");
         }
