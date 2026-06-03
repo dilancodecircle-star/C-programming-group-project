@@ -17,7 +17,7 @@ int donorCount = 0;
 //donor registry functions
 void donorregistry();
 void donorcontactupdate();
-void eligiblitycheck();
+void eligibilitycheck();
 void searchbybloodtype();
 void eligibledonorlist();
 
@@ -43,7 +43,7 @@ int main() {
                 //selecting the sub functions
                 if(subChoice == 1) donorregistry();
                 else if(subChoice == 2) donorcontactupdate();
-                else if(subChoice == 3) eligiblitycheck();
+                else if(subChoice == 3) eligibilitycheck();
                 else if(subChoice == 4) searchbybloodtype();
                 else if(subChoice == 5) eligibledonorlist();
                 break;
@@ -54,9 +54,9 @@ int main() {
                 continue;
             default:
                 printf("Invalid choice. Please try again.\n");
-        )
-    )
-)
+        }
+    }
+}
 
 void donorregistry() {
     //registers the maximum number of donors described above
