@@ -9,10 +9,11 @@ struct LabTest {
 
 
 };
-#define Max_rec 100
+#define Max_rec 100 //declare array size
 struct LabTest test[Max_rec];//making array for labtest
 int testcount = 0;
 
+// declare funtions 
 void logTest();
 void bagsafe();
 void bagGerm();
@@ -34,7 +35,7 @@ int main() {
     scanf("%d", &choice);
 
         switch (choice) {
-            case 3:
+            case 3: // case for schoice 3
                 printf("\n--- Hospital Requests ---\n");
                 printf("1. Register Donor\n");
                 printf("2. Mark Safe\n");
