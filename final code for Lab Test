@@ -114,15 +114,18 @@ void bagGerm(){
 }
 //serch bag wih bag id
 void testhistory() {
-    int  bId;
+    int  bId , find=0;
     printf("Enter the bag ID : ");
     scanf("%d" , &bId);
     for (int i = 0; i<testcount;i++) {
         if (test[i].bagId == bId) {
             printf("test : %d \nMarker : %s \nResult : %s" , test[i].testID , test[i].disease , test[i].result );
+            find = 1;
         }
-        else{
-        printf("Blood Bag not fount");
+    
+}
+if(find==0){
+    printf("Blood Bag not find");
 }
     }
 
