@@ -121,6 +121,9 @@ void testhistory() {
         if (test[i].bagId == bId) {
             printf("test : %d \nMarker : %s \nResult : %s" , test[i].testID , test[i].disease , test[i].result );
         }
+        else{
+        printf("Blood Bag not fount");
+}
     }
 
 }
