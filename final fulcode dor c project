@@ -1,0 +1,621 @@
+#include <stdio.h>
+#include <string.h>
+#include<time.h>
+
+#define MAX_RECORDS 100
+#define max_rec 100
+#define Max_rec 100
+#define MAX_REC 100
+#define MAX_EVENTS 100
+
+struct Donor {
+    int donorID;
+    char name[50];
+    char bloodType[5];
+    int lastdonationdate;
+};
+
+
+//Creat a structure
+struct BloodBag {
+    int bagID;
+    int donorID;
+    char bloodType[5];
+    time_t addedDate;
+    int initialExpiryDays;
+};
+
+//
+
+//making structure for lab test
+struct LabTest {
+    int testID;
+    int bagId;
+    char disease[50];
+    char result[20];
+
+};
+
+//Creat a structure
+
+struct Request {
+    int requestID;
+    char hospitalName[50];
+    char bloodType[5];
+    int urgencyLevel;
+    char status[20];
+};
+
+//Creat a structure
+struct DonationEvent // making structure for donation
+{
+    int eventID;
+    char venue[50];
+    int goalUnits;
+    int gatheredUnits;
+    char scheduleDate[15];
+};
+
+
+//gets records of 100 donors
+struct Donor donors[MAX_RECORDS];
+int donorCount = 0;
+
+struct BloodBag inventory[MAX_RECORDS];
+int bagCount = 0;
+
+struct LabTest test[MAX_RECORDS];//making array for labtest
+int testcount = 0;
+
+struct Request requests[MAX_REC];
+int requestCount = 0;
+
+struct DonationEvent events[MAX_EVENTS]; // define array for structure
+int eventCount = 0;
+
+//donor registry functions
+void donorregistry();
+void donorcontactupdate();
+void eligibilitycheck();
+void searchbybloodtype();
+void eligibledonorlist();
+
+//Define the functions
+void logNDona();
+void disExBlood();
+void searchInType();
+void calcTotUnits();
+int getDaysToExpiry(struct BloodBag bag);
+void NearingExpiry();
+
+//Define the functions
+
+void logTest();
+void bagsafe();
+void bagGerm();
+void testhistory();
+void pendingtest();//function for display pending test
+
+//Define the functions
+
+void logReq();
+void matchReq();
+void fulfillReq();
+void cancelReq();
+void urgencyReq();
+
+//Define the functions
+void addEvent();
+void recordUnits();
+void removeEvent();
+void highlightTopEvent();
+void showUpcomingEvents();
+
+
+
+int main() {
+    int choice , subChoice , schoice;
+    int n=1;
+
+    while(n!=0) {
+    printf("\n======================================================\n");
+   	printf("        Decentralized Blood Bank System  \n");
+    printf("======================================================\n");
+    printf("1. Donor Registry       \n");
+    printf("2. Inventory & Storage      \n");
+    printf("3. Testing & Screening      \n");
+    printf("4. Hospital Requests        \n");
+    printf("5. Drive Logistics      \n");
+    printf("6. Exit System      \n");
+    printf("Enter module number to access: ");
+    scanf("%d", &choice);
+
+        switch(choice) {
+            //selecting the sub part donor registry
+            case 1:
+
+                printf("\n--- Donor Registry ---\n");
+                printf("1. Register Donor\n2. Update Contact\n3. Check Eligibility\n4. Search by Blood Type\n5. List Eligible Donors\nSelect: ");
+                scanf("%d", &subChoice);
+                //selecting the sub functions
+                if(subChoice == 1) donorregistry();
+                else if(subChoice == 2) donorcontactupdate();
+                else if(subChoice == 3) eligibilitycheck();
+                else if(subChoice == 4) searchbybloodtype();
+                else if(subChoice == 5) eligibledonorlist();
+                break;
+
+            case 2:
+                printf("\n--- Inventory & Storage ---\n");
+                printf("1. Log Donation\n2. Discard Expired\n3. Search by Type\n4. Calculate Total\n5. List Nearing Expiry\nSelect: ");
+                scanf("%d", &subChoice);
+                if(subChoice == 1) logNDona();
+                else if(subChoice == 2) disExBlood();
+                else if(subChoice == 3) searchInType();
+                else if(subChoice == 4) calcTotUnits();
+                else if(subChoice == 5) NearingExpiry();
+                break;
+
+            case 3: // case for schoice 3
+                printf("\n--- Hospital Requests ---\n");
+                printf("1. Register Donor\n");
+                printf("2. Mark Safe\n");
+                printf("3.Mark Contaminated\n");
+                printf("4. Search History\n");
+                printf("5. View Pending\nSelect:");
+                scanf("%d", &schoice);
+
+               if (schoice == 1) {//calling funtion one
+                   logTest();
+               }
+                else if (schoice==2) {// calling function two
+                    bagsafe();
+                }
+                else if (schoice==3) {//calling function three
+                    bagGerm();
+
+                }
+                else if (schoice==4) {//calling funtion four
+                    testhistory();
+                }
+                else if (schoice==5) {// calling funtion five
+                    pendingtest();
+                }
+                break;
+
+            case 4: {
+
+                printf("\n--- Hospital Requests ---\n");
+                printf("1. Log Request\n2. Match to Inventory\n3. Fulfill Request\n4. Cancel Request\n5. View High Urgency\nSelect: ");
+                scanf("%d", &subChoice);
+                if(subChoice == 1) logReq();
+                else if(subChoice == 2)  matchReq();
+                else if(subChoice == 3) fulfillReq();
+                else if(subChoice == 4) cancelReq();
+                else if(subChoice == 5) urgencyReq();
+                break;
+            }
+
+            case 5:
+
+            printf("\n--- Event Logistics ---\n");
+            printf("1. Add Event\n2. Record Units\n3. Remove Event\n4. Highlight Top Event\n5. Show Upcoming\nSelect: ");
+            scanf("%d", &subChoice);
+            if (subChoice == 1){
+                addEvent();
+            }
+            else if (subChoice == 2) {
+                recordUnits();
+            }
+            else if (subChoice == 3){
+                removeEvent();
+            }
+            else if (subChoice == 4){
+                highlightTopEvent();
+            }
+            else if (subChoice == 5){
+                showUpcomingEvents();
+            }
+            break;
+
+            case 6:
+                printf("System Terminated Successfully\n");
+                n=0;
+                continue;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+}
+
+void donorregistry() {
+    //registers the maximum number of donors described above
+    if(donorCount < MAX_RECORDS) {
+        printf("Enter Donor ID: ");
+        scanf("%d", &donors[donorCount].donorID);
+        printf("Enter Name: ");
+        scanf("%s", donors[donorCount].name);
+        printf("Enter Blood Type (e.g., O+, AB-): ");
+        scanf("%s", donors[donorCount].bloodType);
+        printf("Enter days since last donation: ");
+        scanf("%d", &donors[donorCount].lastdonationdate);
+        donorCount++;
+        printf("Donor registered successfully!\n");
+    } else {
+        printf("Registry full!\n");
+    }
+}
+
+void donorcontactupdate() {
+    int id;
+    printf("Enter Donor ID to update: ");
+    scanf("%d", &id);
+    for(int i = 0; i < donorCount; i++) {
+        //checking whether the entered donor id matches with the donor id in the donors array
+        if(donors[i].donorID == id) {
+            printf("Enter new Name: ");
+            scanf("%s", donors[i].name);
+            printf("Contact updated.\n");
+            return;
+        }
+    }
+    printf("Donor not found.\n");
+}
+
+void eligibilitycheck() {
+    int id;
+    printf("Enter Donor ID to check: ");
+    scanf("%d", &id);
+    for(int i = 0; i < donorCount; i++) {
+        //checking whether the id that was entered matches with id in the array
+        if(donors[i].donorID == id) {
+            if(donors[i].lastdonationdate > 90) {
+                printf("Eligible to donate.\n");
+            } else {
+                printf("Not eligible. Must wait %d more days.\n", 90 - donors[i].lastdonationdate);
+            }
+            return;
+        }
+    }
+    printf("Donor not found.\n");
+}
+
+void searchbybloodtype() {
+    char type[5];
+    printf("Enter Blood Type to search: ");
+    scanf("%s", type);
+    printf("Donors with type %s:\n", type);
+    for(int i = 0; i < donorCount; i++) {
+        //searching the blood type wanted by comparing it with the availble donors and their blood type
+        if(strcmp(donors[i].bloodType, type) == 0) {
+            printf("- %s (ID: %d)\n", donors[i].name, donors[i].donorID);
+        }
+    }
+}
+void eligibledonorlist(){
+    printf("Currently Eligible Donors:\n");
+    for(int i = 0; i < donorCount; i++) {
+        //checking whether the donor has waited at least 90 days after the last donation to donate blood again
+        if(donors[i].lastdonationdate > 90) {
+            printf("- %s (%s)\n", donors[i].name, donors[i].bloodType);
+        }
+    }
+}
+
+
+//
+//Function for get days to expiry
+int getDaysToExpiry(struct BloodBag bag){
+    time_t now=time(NULL);
+    double secondsPassed=difftime(now,bag.addedDate);
+    int daysPassed=secondsPassed/(60*60*24);
+
+    int daysLeft=bag.initialExpiryDays-daysPassed;
+	if (daysLeft < 0) {
+	    return 0;
+	} else {
+	    return daysLeft;
+	}
+
+
+}
+
+//Function for log new donations
+void logNDona() {
+    if(bagCount < max_rec) {
+        printf("Enter Bag ID: ");
+        scanf("%d", &inventory[bagCount].bagID);
+        printf("Enter Donor ID: ");
+        scanf("%d", &inventory[bagCount].donorID);
+        printf("Enter Blood Type: ");
+        scanf("%s", inventory[bagCount].bloodType);
+        printf("Enter initial days to expiry (usually 42): ");
+        scanf("%d", &inventory[bagCount].initialExpiryDays);
+        inventory[bagCount].addedDate=time(NULL);
+        bagCount++;
+        printf("Bag added to inventory.\n");
+    }
+}
+
+//Function for discard expired blood
+void disExBlood() {
+    int count = 0;
+    for(int i = 0; i < bagCount; i++) {
+        if(getDaysToExpiry(inventory[i]) <= 0) {
+            inventory[i].initialExpiryDays = -1;
+            count++;
+        }
+    }
+    printf("%d expired bags discarded from system.\n", count);
+}
+
+//Function for Search inventory bt type
+void searchInType() {
+    char type[5];
+    int count = 0;
+    printf("Enter Blood Type: ");
+    scanf("%s", type);
+    for(int i = 0; i < bagCount; i++) {
+        if(strcmp(inventory[i].bloodType, type) == 0 && getDaysToExpiry(inventory[i]) > 0) {
+            count++;
+        }
+    }
+    printf("Total available %s bags: %d\n", type, count);
+}
+
+//Function for calculate total units
+void calcTotUnits() {
+    int active = 0;
+    for(int i = 0; i < bagCount; i++) {
+        if(getDaysToExpiry(inventory[i]) > 0)
+            active++;
+    }
+    printf("Total valid blood units in bank: %d\n", active);
+}
+
+//Function for get the list of nearing expiry
+void NearingExpiry() {
+	int daysLeft;
+    printf("Bags expiring in less than 5 days:\n");
+    for(int i = 0; i < bagCount; i++) {
+        daysLeft=getDaysToExpiry(inventory[i]);
+        if(daysLeft>0&&daysLeft<=5) {
+            printf("Bag ID: %d | Days left: %d\n", inventory[i].bagID,daysLeft);
+        }
+    }
+}
+
+
+//making logtest
+void logTest() {
+    if (testcount<Max_rec) {
+        printf("Enter the test ID : ");
+        scanf("%d" , &test[testcount].testID);
+        printf("Enter the bag ID : ");
+        scanf("%d" , &test[testcount].bagId);
+        while(getchar()!='\n');
+        printf("Enter Disease Marker (e.g., HIV, HepB): ");
+        fgets(test[testcount].disease , 50 , stdin);
+        test[testcount].disease[strcspn(test[testcount].disease , "\n")] = '\0';
+        strcpy(test[testcount].result, "Pending");
+        testcount++;
+        printf("Test logged successfully.\n");
+
+    }
+}
+//rust blood bag as safe
+void bagsafe() {
+    int id;
+    printf("Enter test ID : ");
+    scanf("%d" , &id);
+    for (int i = 0 ; i<testcount ; i++) {
+        if (test[i].testID==id) {
+            strcpy(test[i].result,"safe");
+            printf("Bag marked as safe");
+        }
+    }
+
+
+}
+// mark blood bag with germs
+void bagGerm(){
+    int id;
+    printf("Enter the ID : ");
+    scanf("%d" , &id);
+    for (int i = 0 ; i<testcount ; i++) {
+        if (test[i].testID==id) {
+            strcpy(test[i].result,"Germ");
+            printf("WARNING Bag containe germ , dispose immediatly");
+
+        }
+    }
+}
+//serch bag wih bag id
+void testhistory() {
+    int  bId , find=0;
+    printf("Enter the bag ID : ");
+    scanf("%d" , &bId);
+    for (int i = 0; i<testcount;i++) {
+        if (test[i].bagId == bId) {
+            printf("test : %d \nMarker : %s \nResult : %s" , test[i].testID , test[i].disease , test[i].result );
+            find = 1;
+        }
+
+}
+if(find==0){
+    printf("Blood Bag not find");
+}
+    }
+
+
+// find pending blood bags
+void pendingtest() {
+    printf("pending Lab test :\n");
+    for (int i=0;i<testcount ;i++) {
+        if (strcmp(test[i].result , "Pending" ) == 0) {
+            printf("Test ID : %d  ,  Bag ID : %d \n" , test[i].testID , test[i].bagId );
+        }
+    }
+
+}
+
+void logReq() // This function is for add a new blood request from a hospital into the system
+{
+    if(requestCount < MAX_REC) {
+        printf("Enter Request ID: ");
+        scanf("%d", &requests[requestCount].requestID);
+        printf("Enter Hospital Name: ");
+        scanf("%s", requests[requestCount].hospitalName);
+        printf("Enter Blood Type Needed: ");
+        scanf("%s", requests[requestCount].bloodType);
+        printf("Enter Urgency (1-5): ");
+        scanf("%d", &requests[requestCount].urgencyLevel);
+        strcpy(requests[requestCount].status, "Pending");
+        requestCount++;
+        printf("Hospital request logged.\n");
+    }
+}
+
+void matchReq() // This function is for search through the stored blood bags to see if there is an unexpired bag that matches the blood type requested by the hospital
+{
+    int reqId;
+    printf("Enter Request ID to check matches: ");
+    scanf("%d", &reqId);
+    for(int i = 0; i < requestCount; i++) {
+        if(requests[i].requestID == reqId) {
+            printf("Searching inventory for %s blood...\n", requests[i].bloodType);
+            for(int j = 0; j < bagCount; j++) {
+                if(strcmp(inventory[j].bloodType, requests[i].bloodType) == 0 && inventory[j].initialExpiryDays > 0) {
+                    printf("Match found! Bag ID: %d is available.\n", inventory[j].bagID);
+                    return;
+                }
+            }
+            printf("No matching blood available in inventory.\n");
+            return;
+        }
+    }
+}
+
+void fulfillReq() // This function is for change the status of a hospital's request to "Fulfilled" once they have received their blood.
+{
+    int reqId;
+    printf("Enter Request ID to fulfill: ");
+    scanf("%d", &reqId);
+    for(int i = 0; i < requestCount; i++) {
+        if(requests[i].requestID == reqId) {
+            strcpy(requests[i].status, "Fulfilled");
+            printf("Request marked as fulfilled.\n");
+            return;
+        }
+    }
+}
+
+void cancelReq() // This function is for change the status of a hospital's request to "Cancelled" if the blood is no longer needed.
+{
+    int reqId;
+    printf("Enter Request ID to cancel: ");
+    scanf("%d", &reqId);
+    for(int i = 0; i < requestCount; i++) {
+        if(requests[i].requestID == reqId) {
+            strcpy(requests[i].status, "Cancelled");
+            printf("Request cancelled.\n");
+            return;
+        }
+    }
+}
+
+void urgencyReq() // This function is for filter and display all active blood requests that have an urgency level of 4 or 5
+{
+    printf("High Urgency Emergency Requests:\n");
+    for(int i = 0; i < requestCount; i++) {
+        if(requests[i].urgencyLevel >= 4 && strcmp(requests[i].status, "Pending") == 0) {
+            printf("Req ID: %d | Hospital: %s | Type: %s\n", requests[i].requestID, requests[i].hospitalName, requests[i].bloodType);
+        }
+    }
+}
+
+void addEvent() //This function for add a new event
+{
+    if (eventCount < MAX_EVENTS)
+    {
+        printf("Enter Event ID: ");
+        scanf("%d", &events[eventCount].eventID);
+        printf("Enter Venue: ");
+        scanf("%s", events[eventCount].venue);
+        printf("Enter Date (DD-MM-YYYY): ");
+        scanf("%s", events[eventCount].scheduleDate);
+        printf("Enter Goal Units: ");
+        scanf("%d", &events[eventCount].goalUnits);
+        events[eventCount].gatheredUnits = 0;
+        eventCount++;
+        printf("Event added successfully.\n");
+    }
+}
+
+void recordUnits()  //This function for update the total amount of blood collected for a specific camp as donation come in.
+{
+    int eId, units;
+    printf("Enter Event ID: ");
+    scanf("%d", &eId);
+    printf("Enter newly gathered units: ");
+    scanf("%d", &units);
+    for (int i = 0; i < eventCount; i++)
+    {
+        if (events[i].eventID == eId)
+        {
+            events[i].gatheredUnits += units;
+            printf("Total units gathered for event %d: %d\n", eId, events[i].gatheredUnits);
+            return;
+        }
+    }
+}
+
+void removeEvent()  //This function for cancel a sheduled blood donation camp.
+{
+    int eId;
+    printf("Enter Event ID to remove: ");
+    scanf("%d", &eId);
+    for (int i = 0; i < eventCount; i++)
+    {
+        if (events[i].eventID == eId)
+        {
+            events[i].goalUnits = -1;
+            printf("Event removed.\n");
+            return;
+        }
+    }
+}
+
+void highlightTopEvent()  //This function for find and display the most successful blood donation camp
+{
+    int topIndex = 0;
+    int maxUnits = -1;
+    for (int i = 0; i < eventCount; i++)
+    {
+        if (events[i].gatheredUnits > maxUnits)
+        {
+            maxUnits = events[i].gatheredUnits;
+            topIndex = i;
+        }
+    }
+    if (maxUnits >= 0)
+    {
+        printf("Top event was at %s with %d units gathered.\n", events[topIndex].venue, maxUnits);
+    }
+    else
+    {
+        printf("No events recorded yet.\n");
+    }
+}
+
+void showUpcomingEvents()  //This function for display a list of all the active,upcoming blood donation camps
+{
+    printf("Upcoming Donation Events:\n");
+    for (int i = 0; i < eventCount; i++)
+    {
+        if (events[i].goalUnits > 0)
+        {
+            printf("Date: %s | Venue: %s | Goal: %d units\n", events[i].scheduleDate, events[i].venue, events[i].goalUnits);
+        }
+    }
+}
