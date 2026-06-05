@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include<time.h>
 
@@ -303,7 +304,7 @@ void eligibledonorlist(){
 }
 
 
-//
+//member 2
 //Function for get days to expiry
 int getDaysToExpiry(struct BloodBag bag){
     time_t now=time(NULL);
@@ -319,6 +320,7 @@ int getDaysToExpiry(struct BloodBag bag){
 
 
 }
+
 
 //Function for log new donations
 void logNDona() {
@@ -385,7 +387,7 @@ void NearingExpiry() {
     }
 }
 
-
+/// member 3
 //making logtest
 void logTest() {
     if (testcount<Max_rec) {
